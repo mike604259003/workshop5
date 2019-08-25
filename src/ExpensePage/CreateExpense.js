@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class CreateExpense extends React.Component {
 
@@ -13,43 +14,70 @@ export default class CreateExpense extends React.Component {
         }
     }
 
+    handleSubmit(event) {
+        event.preventDefault();
+        console.log(this.state)
+
+        // fetch("http://localhost/3.api_expense/crud_expense.php?cmd=insert", {
+        //     method: 'POST',
+        //     body: JSON.stringify(this.state),
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // }).then(response => {
+        //     return window.location.hash = "/read-expense"
+        // }).catch(err => err)
+    }
+
     render() {
         return (
 
             <div>
-                <form action="">
-                    <div className="from-group row">
-                        <label htmlFor="">หมวดหมูค่าใช้จ่าย</label>
-                        <select name="" id="" className="form-control col-md-3">
-                            <option value="0">เลือกหมวดหมู่ค่าใช้จ่าย</option>
-                            <option value="1">รายรับ</option>
-                            <option value="2">รายจ่าย</option>
-                        </select>
-
-                    </div>
-                    <br />
-
+                <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this)}>
                     <div className="form-group row">
-                        <label htmlFor="">รายการ</label>
-                        <div className="col-md-6">
-                            <input type="text" className="form-control" />
+                        <input type="hidden" className="form-control" value={this.state.expenseID}
+                            onChange={e => this.setState({ expenseID: e.target.value })} />
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="" className="control-label col-md-3">
+                            หมวดหมู่ค่าใช้จ่าย</label>
+                        <div className="col-md-8">
+                            <select className="form-control" name="" value={this.state.catExpense} onChange={e => this.setState({ catExpense: e.target.value })}>
+                                <option value="0">เลือกหมวดหมู่</option>
+                                <option value="1">รายรับ</option>
+                                <option value="2">รายจ่าย</option>
+                            </select>
                         </div>
                     </div>
-
-                    <div className="form-group row">
-                        <label htmlFor="">จำนวน</label>
-                        <div className="col-md-6">
-                            <input type="text" className="form-control" />
+                    <div className="form-group row ">
+                        <label htmlFor="" className="control-label col-md-3">
+                            รายการ</label>
+                        <div className="col-md-8">
+                            <input type="text" className="form-control" value={this.state.expense}
+                                onChange={e => this.setState({ expense: e.target.value })} />
                         </div>
                     </div>
-
                     <div className="form-group row">
-                        <a href=""><button className="btn btn-primary">บันทึก</button></a>
-                        <a href="#read-expense"><button className="btn btn-danger">ยกเลิก</button></a>
+                        <label htmlFor="" className="control-label col-md-3">
+                            จำนวนเงิน</label>
+                        <div className="col-md-8">
+                            <input type="number" className="form-control" value={this.state.amount}
+                                onChange={e => this.setState({ amount: e.target.value })} />
+                        </div>
                     </div>
-
+                    <div className="form-group row text-center">
+                        <div className="col-md-12">
+                            <button type="submit" className="btn btn-primary">
+                                <i className="fa fa-fw fa-lg fa-check-circle"></i> บันทึก</button>
+                            &nbsp;&nbsp;&nbsp;
+                                    <Link to={"/read-expense/"} className="btn btn-secondary">
+                                <i className="fa fa-fw fa-lg fa-times-circle"></i>ยกเลิก</Link>
+                        </div>
+                    </div>
                 </form>
+
             </div>
+
         )
     }
 }
