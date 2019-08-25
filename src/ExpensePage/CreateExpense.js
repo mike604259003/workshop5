@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 export default class CreateExpense extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             expenseID: "",
@@ -13,6 +13,10 @@ export default class CreateExpense extends React.Component {
             amount: "",
             description: ""
 
+        }
+
+        if (this.props.match.params.id != "") {
+            this.showData()
         }
     }
 
@@ -30,6 +34,32 @@ export default class CreateExpense extends React.Component {
             return window.location.hash = "/read-expense"
         }).catch(err => err)
     }
+
+    showData() {
+        const apiUrl = "http://localhost/3.api_expense/crud_expense.php?cmd=readOne";
+        let data = {
+            expenseID: this.props.match.params.id
+        }
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(data)
+        }
+        fetch(apiUrl, options)
+            .then(response => response.json())
+            .then(response => {
+                this.setState({
+                    expenseList: response.rs,
+                    expenseID: response.rs[0].expense_id,
+                    catExpense: response.rs[0].cate_expense_id,
+                    expense: response.rs[0].expense_name,
+                    amount: response.rs[0].amount
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
 
     render() {
         return (

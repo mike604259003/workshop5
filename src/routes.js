@@ -17,8 +17,10 @@ const CreateExpense = Loadable({
 });
 
 
+
 let routes = [
     { path: '/read-expense', name: 'ReadExpense', component: ReadExpense },
     { path: '/create-expense', name: 'CreateExpense', component: CreateExpense },
+    { path: '/edit-expense/:id', name: 'EditExpense', component: CreateExpense }
 ];
 export default routes;

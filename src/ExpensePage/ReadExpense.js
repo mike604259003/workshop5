@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class ReadExpense extends React.Component {
     constructor() {
@@ -17,6 +18,31 @@ export default class ReadExpense extends React.Component {
                 })
             })
     }
+
+    deleteExpense(expenseId) {
+
+        const apiUrl =
+            "http://localhost/3.api_expense/crud_expense.php?cmd=delete";
+        let data = {
+            expenseID: expenseId
+        }
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(data)
+        }
+
+        fetch(apiUrl, options)
+            .then(response => {
+                this.setState({
+                    response: response,
+                });
+            },
+                (error) => {
+                    this.setState({ error });
+                }
+            )
+    }
+
 
     render() {
         const { expense } = this.state;
@@ -59,10 +85,13 @@ export default class ReadExpense extends React.Component {
                                         <td>{object.description}</td>
                                         <td>
                                             <div className="btn-group">
-                                                <a href="#" className='btn btn-sm btn-primary m-r-1em'>
+                                                <Link to={"/edit-expense/" + object.expense_id} className='btn btn-sm btn-primary m-r-1em'>
                                                     <span className='fa fa-pencil-alt'></span>
-                                                </a>
-                                                <a href="#" className='btn btn-sm btn-danger'>
+                                                </Link>
+                                                <a onClick={
+                                                    () => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteExpense(object.expense_id) }
+                                                }
+                                                    href="#" className='btn btn-sm btn-danger'>
                                                     <span className='fa fa-trash'></span>
                                                 </a>
                                             </div>
