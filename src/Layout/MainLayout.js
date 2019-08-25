@@ -29,15 +29,10 @@ export default class MainLayout extends React.Component {
 
 
                             <hr />
-                            <div className="btn-group">
-                                <a href="#" className='btn btn-sm btn-primary m-r-1em'>
-                                    <span className='fa fa-plus'></span>เพิ่มใหม่
-                                </a>
 
-                            </div>
 
                             <p>
-                                <br />
+
 
                                 <HashRouter>
                                     <Switch>

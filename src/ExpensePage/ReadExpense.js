@@ -21,8 +21,20 @@ export default class ReadExpense extends React.Component {
     render() {
         const { expense } = this.state;
         return (
+
             <div>
                 <div className="row">
+                    <div className="btn-group">
+                        <a href="#create-expense" className='btn btn-sm btn-primary m-r-1em'>
+                            <span className='fa fa-plus'></span>เพิ่มใหม่
+                                </a>
+
+                    </div>
+                </div>
+                <br />
+
+                <div className="row">
+
                     <div className="col-12 table-responsive">
                         <table className="table table-striped">
                             <thead>
