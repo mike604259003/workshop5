@@ -43,6 +43,7 @@ export default class ReadExpense extends React.Component {
                                     <th>หมวดหมู่ค่าใช้จ่าย</th>
                                     <th>รายการ</th>
                                     <th>จำนวนเงิน</th>
+                                    <th>รายละเอียด</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -55,6 +56,7 @@ export default class ReadExpense extends React.Component {
                                         <td>{object.cate_expense_name}</td>
                                         <td>{object.expense_name}</td>
                                         <td>{object.amount}</td>
+                                        <td>{object.description}</td>
                                         <td>
                                             <div className="btn-group">
                                                 <a href="#" className='btn btn-sm btn-primary m-r-1em'>

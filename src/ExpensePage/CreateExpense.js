@@ -7,9 +7,11 @@ export default class CreateExpense extends React.Component {
         super();
 
         this.state = {
+            expenseID: "",
             catExpense: "",
             expense: "",
             amount: "",
+            description: ""
 
         }
     }
@@ -18,15 +20,15 @@ export default class CreateExpense extends React.Component {
         event.preventDefault();
         console.log(this.state)
 
-        // fetch("http://localhost/3.api_expense/crud_expense.php?cmd=insert", {
-        //     method: 'POST',
-        //     body: JSON.stringify(this.state),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }).then(response => {
-        //     return window.location.hash = "/read-expense"
-        // }).catch(err => err)
+        fetch("http://localhost/3.api_expense/crud_expense.php?cmd=insert", {
+            method: 'POST',
+            body: JSON.stringify(this.state),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            return window.location.hash = "/read-expense"
+        }).catch(err => err)
     }
 
     render() {
@@ -63,6 +65,15 @@ export default class CreateExpense extends React.Component {
                         <div className="col-md-8">
                             <input type="number" className="form-control" value={this.state.amount}
                                 onChange={e => this.setState({ amount: e.target.value })} />
+                        </div>
+                    </div>
+
+                    <div className="form-group row">
+                        <label htmlFor="" className="control-label col-md-3">
+                            หมายเหตุ</label>
+                        <div className="col-md-8">
+                            <input type="text" className="form-control" value={this.state.description}
+                                onChange={e => this.setState({ description: e.target.value })} />
                         </div>
                     </div>
                     <div className="form-group row text-center">
